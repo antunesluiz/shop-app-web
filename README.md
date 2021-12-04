@@ -2,7 +2,7 @@
 
 ## Instalação requisitos
 
-1. Composer: https://getcomposer.otg/download/
+1. Composer: https://getcomposer.org/download/
 2. Git: https://git-scm.com/download/win
 3. PHP
 4. MySql
