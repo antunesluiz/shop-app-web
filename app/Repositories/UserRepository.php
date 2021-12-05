@@ -25,6 +25,17 @@ class UserRepository {
         $user->last_name = $data->last_name;
         $user->phone = $data->phone;
         $user->address = $data->address;
+        $user->completeProfile = true;
+
+        $user->save();
+
+        return $user;
+    }
+
+    public static function login($data) {
+        $user = $data->user;
+
+        $user->remember_token = User::generate_token();
 
         $user->save();
 
