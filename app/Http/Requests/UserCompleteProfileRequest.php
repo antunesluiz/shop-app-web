@@ -3,11 +3,11 @@
 namespace App\Http\Requests;
 
 use App\Models\User;
-use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class UserRegisterRequest extends FormRequest
+class UserCompleteProfileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,9 +27,13 @@ class UserRegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            'email'         => 'required|unique:user|email:rfc,dns',
-            'password'      => 'required',
-            'token'         => 'required'
+            'id'            => 'required',
+            'first_name'    => 'required',
+            'last_name'     => 'required',
+            'phone'         => 'required|unique:user|size:11',
+            'address'       => 'required',
+            'token'         => 'required',
+            'user'          => 'required'
         ];
     }
 
@@ -41,11 +45,12 @@ class UserRegisterRequest extends FormRequest
     public function messages()
     {
         return [
-
-            'email.required'        => 'Email is required',
-            'email.unique'          => 'Email should be unique',
-            'password.required'     => 'Password is required',
-            'token.required'        => 'Token is required',
+            'id.required'           => 'id is required',
+            'first_name.required'   => 'First name is required',
+            'last_name.required'    => 'Last name is required',
+            'phone.required'        => 'Phone is required',
+            'phone.unique'          => 'Phone should be unique',
+            'address.required'      => 'Address is required',
         ];
     }
 
@@ -56,8 +61,10 @@ class UserRegisterRequest extends FormRequest
      */
     protected function prepareForValidation()
     {
+        $user = User::where('id', $this->id)->where('remember_token', $this->token)->first();
+
         $this->merge([
-            'token' => User::generate_token()
+            'user' => $user,
         ]);
     }
 
@@ -67,6 +74,7 @@ class UserRegisterRequest extends FormRequest
             response()->json([
                 'success'       => false,
                 'error'         => $validator->errors()->all()[0],
+                'error_code'    => 402
             ], 402)
         );
     }

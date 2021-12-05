@@ -15,10 +15,13 @@ class UserRegisterResource extends JsonResource
     public function toArray($request)
     {
         $user = $this['user'];
+        $user['token'] = $user['remember_token'];
+        $user['firstName'] = $user['first_name'];
+        $user['lastName'] = $user['last_name'];
 
         return [
             'success'   => true,
-            'token'     => $user['remember_token']
+            'user'      => $user
         ];
     }
 }

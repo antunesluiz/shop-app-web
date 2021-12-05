@@ -22,6 +22,7 @@ class User extends Model {
         'phone',
         'email',
         'password',
+        'remember_token',
     ];
 
     protected $table = 'user';

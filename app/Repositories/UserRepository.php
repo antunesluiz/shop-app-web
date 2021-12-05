@@ -9,15 +9,25 @@ class UserRepository {
     public static function createUser($userData) {
        $user = new User();
 
-       $user->first_name = $userData->first_name;
-       $user->last_name = $userData->last_name;
        $user->email = $userData->email;
-       $user->phone = $userData->phone;
        $user->password = Hash::make($userData->password);
        $user->remember_token = $userData->token;
 
        $user->save();
        
        return $user;
+    }
+
+    public static function completeProfile($data) {
+        $user = $data->user;
+
+        $user->first_name = $data->first_name;
+        $user->last_name = $data->last_name;
+        $user->phone = $data->phone;
+        $user->address = $data->address;
+
+        $user->save();
+
+        return $user;
     }
 }
