@@ -17,8 +17,8 @@ class UserRegisterResource extends JsonResource
         $user = $this['user'];
 
         return [
-            'success' => true,
-            'token' => $user['remember_token']
+            'success'   => true,
+            'token'     => $user['remember_token']
         ];
     }
 }
