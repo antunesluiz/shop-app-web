@@ -19,19 +19,7 @@ class UserLoginController extends Controller
      */
     public function login(UserLoginRequest $request) {
         $user = UserRepository::login($request);
-
-        $data = [
-            'success'   => false,
-            'user'      => null,
-        ];
-
-        if ($user) {
-            $data = [
-                'success'   => true,
-                'user'      => $user,
-            ];
-        }
-
-        return new UserLoginResource($data);
+        
+        return new UserLoginResource(['success' => true, 'user' => $user]);
     }
 }
