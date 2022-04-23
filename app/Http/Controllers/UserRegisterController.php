@@ -12,6 +12,7 @@ class UserRegisterController extends Controller
     /**
      * @api {post}/api/user/register
      * Faz o registro de um novo usuário no sistema
+     * 
      * @param UserRegisterRequest $request
      * @return json
      */
@@ -24,6 +25,7 @@ class UserRegisterController extends Controller
     /**
      * @api {post}/api/user/complete_profile
      * Completa o cadastro de um usuário
+     * 
      * @param UserCompleteProfileRequest $request
      * @return json
      */

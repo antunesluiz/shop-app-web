@@ -10,6 +10,13 @@ use Illuminate\Http\Request;
 
 class UserLoginController extends Controller
 {
+    /**
+     * @api {post}/api/user/login
+     * Faz o login do usuário
+     * 
+     * @param UserLoginRequest $request
+     * @return json
+     */
     public function login(UserLoginRequest $request) {
         $user = UserRepository::login($request);
 
